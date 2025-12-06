@@ -11,6 +11,8 @@ export interface Course {
   thumbnail: string;
   link: string;
   items: CourseItem[];
+  locked?: boolean;
+  purchaseLink?: string;
 }
 
 export const courses: Course[] = [
@@ -19,6 +21,7 @@ export const courses: Course[] = [
     title: 'Plan A: Reconquista en 21 Días',
     thumbnail: 'https://i.ibb.co/CK8F67my/Editedimage-1765052659367.png',
     link: 'https://semloginplan.vercel.app/',
+    locked: false,
     items: [
       {
         id: '1-1',
@@ -42,79 +45,85 @@ export const courses: Course[] = [
   },
   {
     id: '2',
-    title: '15 Maneras Irresistibles en WhatsApp',
-    thumbnail: 'https://comprarplanseguro.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-12T001538.498.png',
-    link: 'https://comprarplanseguro.shop/15-maneras/',
+    title: '⚠️ MANUAL CONFIDENCIAL – NO COMPARTIR',
+    thumbnail: 'https://static-media.hotmart.com/LgGu0m_yZoDJ-tQyFlGt1v8YWbk=/300x300/filters:quality(100)/hotmart/product_pictures/43a66fef-99aa-44b1-9365-0b5379b5327b/Generatedimage_1764121962697.png',
+    link: 'https://pay.hotmart.com/L100337728M?off=uo2v2p2i&bid=1765056809051',
+    locked: true,
+    purchaseLink: 'https://pay.hotmart.com/L100337728M?off=uo2v2p2i&bid=1765056809051',
     items: [
       {
         id: '2-1',
-        title: 'Las 15 Técnicas Probadas',
+        title: 'Contenido Bloqueado',
         type: 'video',
-        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        url: ''
       },
       {
         id: '2-2',
-        title: 'Guía de Comunicación Digital',
+        title: 'Contenido Bloqueado',
         type: 'pdf',
-        url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        url: ''
       },
       {
         id: '2-3',
-        title: 'Acceder al Contenido',
+        title: 'Comprar Acceso',
         type: 'link',
-        url: 'https://comprarplanseguro.shop/15-maneras/'
+        url: 'https://pay.hotmart.com/L100337728M?off=uo2v2p2i&bid=1765056809051'
       }
     ]
   },
   {
     id: '3',
-    title: 'Protocolo de Dominancia Emocional',
-    thumbnail: 'https://comprarplanseguro.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-11T090923.835.png',
-    link: 'https://comprarplanseguro.shop/protocolo/',
+    title: '⚠️ PROTOCOLO SECRETO – NO ABRIR EN PÚBLICO',
+    thumbnail: 'https://static-media.hotmart.com/3C8rKJbwWjzYkRh3olCwpeoHgSI=/300x300/filters:quality(100)/hotmart/product_pictures/88103e0b-a7a6-4e74-9a7d-826f74e9c6a1/Editedimage_1764121841751.png',
+    link: 'https://pay.hotmart.com/B100918128K?off=waf5qigo&bid=1765056925329',
+    locked: true,
+    purchaseLink: 'https://pay.hotmart.com/B100918128K?off=waf5qigo&bid=1765056925329',
     items: [
       {
         id: '3-1',
-        title: 'Los 7 Disparadores de Obsesión',
+        title: 'Contenido Bloqueado',
         type: 'video',
-        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        url: ''
       },
       {
         id: '3-2',
-        title: '21 Frases de Dominancia',
+        title: 'Contenido Bloqueado',
         type: 'pdf',
-        url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        url: ''
       },
       {
         id: '3-3',
-        title: 'Acceder al Protocolo',
+        title: 'Comprar Acceso',
         type: 'link',
-        url: 'https://comprarplanseguro.shop/protocolo/'
+        url: 'https://pay.hotmart.com/B100918128K?off=waf5qigo&bid=1765056925329'
       }
     ]
   },
   {
     id: '4',
-    title: 'Sistema de Blindaje',
-    thumbnail: 'https://comprarplanseguro.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-10T233008.344.png',
-    link: 'https://comprarplanseguro.shop/blindaje/',
+    title: 'Consultoría Personalizada - Reconexión Estratégica',
+    thumbnail: 'https://static-media.hotmart.com/japd0HSlpsd3Hugape7LLQpN_5U=/300x300/filters:quality(100)/hotmart/product_pictures/c35bfce8-ccef-4953-8e0e-be7ee0560590/imagem_gerada20250611T112151941.png',
+    link: 'https://pay.hotmart.com/B100254351O?off=csguaiek&bid=1765057073540',
+    locked: true,
+    purchaseLink: 'https://pay.hotmart.com/B100254351O?off=csguaiek&bid=1765057073540',
     items: [
       {
         id: '4-1',
-        title: 'Blindaje Total de Relación',
+        title: 'Contenido Bloqueado',
         type: 'video',
-        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        url: ''
       },
       {
         id: '4-2',
-        title: 'Inmunidad Contra Otros Hombres',
+        title: 'Contenido Bloqueado',
         type: 'pdf',
-        url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        url: ''
       },
       {
         id: '4-3',
-        title: 'Acceder al Sistema',
+        title: 'Comprar Acceso',
         type: 'link',
-        url: 'https://comprarplanseguro.shop/blindaje/'
+        url: 'https://pay.hotmart.com/B100254351O?off=csguaiek&bid=1765057073540'
       }
     ]
   }

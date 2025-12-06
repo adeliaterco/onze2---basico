@@ -1,5 +1,5 @@
 import { courses } from '../data/courses';
-import { Moon, Sun, LogOut } from 'lucide-react';
+import { Moon, Sun, LogOut, Lock } from 'lucide-react';
 
 interface DashboardProps {
   onSelectCourse: (url: string) => void;
@@ -9,6 +9,14 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ onSelectCourse, onLogout, theme, onToggleTheme }: DashboardProps) {
+  const handleCourseClick = (course: any) => {
+    if (course.locked) {
+      window.open(course.purchaseLink, '_blank');
+    } else {
+      onSelectCourse(course.link);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-gray-800 transition-all duration-300">
       
@@ -58,51 +66,92 @@ export default function Dashboard({ onSelectCourse, onLogout, theme, onToggleThe
           {courses.map((course) => (
             <div
               key={course.id}
-              onClick={() => onSelectCourse(course.link)}
-              className="mobile-card group cursor-pointer w-full max-w-full"
+              onClick={() => handleCourseClick(course)}
+              className={`mobile-card group w-full max-w-full ${course.locked ? 'cursor-not-allowed opacity-80 hover:opacity-90' : 'cursor-pointer'}`}
             >
               
               {/* Card Responsivo */}
-              <div className="w-full bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg dark:shadow-gray-900/20 overflow-hidden border border-gray-200/50 dark:border-gray-700/50 hover:shadow-xl transition-all duration-300">
+              <div className={`w-full rounded-xl sm:rounded-2xl shadow-lg dark:shadow-gray-900/20 overflow-hidden border transition-all duration-300 ${
+                course.locked 
+                  ? 'bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600' 
+                  : 'bg-white dark:bg-gray-800 border-gray-200/50 dark:border-gray-700/50 hover:shadow-xl'
+              }`}>
                 
                 {/* Imagem Responsiva */}
                 <div className="relative overflow-hidden">
                   <img
                     src={course.thumbnail}
                     alt={course.title}
-                    className="w-full h-40 sm:h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={`w-full h-40 sm:h-48 md:h-56 object-cover transition-transform duration-500 ${
+                      !course.locked && 'group-hover:scale-105'
+                    } ${course.locked && 'grayscale opacity-75'}`}
                     loading="lazy"
                   />
                   
                   {/* Overlay Mobile Friendly */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent ${
+                    course.locked ? 'opacity-50' : 'opacity-0 group-hover:opacity-100'
+                  } transition-opacity duration-300`}></div>
                   
-                  {/* Botão de Acesso Responsivo */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg border border-white/20 mx-4">
-                      <span className="text-gray-900 dark:text-white font-semibold text-xs sm:text-sm">
-                        Acceder al Curso
-                      </span>
+                  {/* Ícone de Cadeado - Produtos Bloqueados */}
+                  {course.locked && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-red-500/90 dark:bg-red-600/90 backdrop-blur-sm px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-lg border border-red-400/50 mx-4 flex flex-col items-center gap-2">
+                        <Lock size={24} className="text-white" />
+                        <span className="text-white font-semibold text-xs sm:text-sm">
+                          Bloqueado
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  )}
+                  
+                  {/* Botão de Acesso - Produtos Desbloqueados */}
+                  {!course.locked && (
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg border border-white/20 mx-4">
+                        <span className="text-gray-900 dark:text-white font-semibold text-xs sm:text-sm">
+                          Acceder al Curso
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Conteúdo Responsivo */}
                 <div className="p-4 sm:p-6">
-                  <h2 className="text-base sm:text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 line-clamp-2">
+                  <h2 className={`text-base sm:text-xl font-bold mb-3 leading-tight transition-colors duration-200 line-clamp-2 ${
+                    course.locked 
+                      ? 'text-gray-700 dark:text-gray-300' 
+                      : 'text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400'
+                  }`}>
                     {course.title}
                   </h2>
                   
                   {/* Footer do Card */}
                   <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 border border-green-200 dark:border-green-800">
-                      Disponível
-                    </span>
+                    {course.locked ? (
+                      <span className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border border-red-200 dark:border-red-800">
+                        <Lock size={12} />
+                        Bloqueado
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 border border-green-200 dark:border-green-800">
+                        Disponível
+                      </span>
+                    )}
                     
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 flex-shrink-0">
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
+                    <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transform ${
+                      course.locked 
+                        ? 'bg-red-500 dark:bg-red-600' 
+                        : 'bg-gradient-to-r from-blue-500 to-purple-500 group-hover:rotate-12'
+                    } transition-transform duration-300 flex-shrink-0`}>
+                      {course.locked ? (
+                        <Lock size={16} className="text-white" />
+                      ) : (
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      )}
                     </div>
                   </div>
                 </div>
