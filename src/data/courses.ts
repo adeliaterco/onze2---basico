@@ -15,6 +15,21 @@ export interface Course {
   purchaseLink?: string;
 }
 
+export interface Banner {
+  id: string;
+  imageUrl: string;
+  link?: string; // ← OPCIONAL: deixe vazio '' se não quiser redirecionar
+  alt: string;
+}
+
+// ⬇️ BANNER - INSIRA O LINK DA IMAGEM AQUI
+export const banner: Banner = {
+  id: 'banner-1',
+  imageUrl: 'https://i.ibb.co/bM8t6D9c/Editedimage-1767213542337.jpg', // ← Cole o link da imagem aqui
+  link: 'https://pay.hotmart.com/N100236449C?off=stok9rjn', // ← Deixe vazio '' para não redirecionar, ou cole um link para tornar clicável
+  alt: 'Banner Promocional'
+};
+
 export const courses: Course[] = [
   {
     id: '1',
